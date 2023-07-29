@@ -59,7 +59,9 @@ function Destination() {
     const date_visited = destination.map((dest) => {
         return dest.date_visited
     })
-
+    const picture = destination.map((dest) => {
+        return dest.picture
+    })
 
     return (
         
@@ -80,11 +82,11 @@ function Destination() {
                     </Card>
                 </Col>
                 <Col className="d-flex flex-row" >
-                    <Image src={destination.picture} rounded className="img-fluid" />
+                    <Image src={picture} rounded className="img-fluid" />
                 </Col>
             </Row>
             <Col className="d-flex flex-row">
-                <Link to={`/edit/${destination.name}`}>
+                <Link to={`/edit/${name}`}>
                     <Button variant="success" size="lg"><i className="fa-solid fa-pen-to-square"></i>  EDIT</Button>
                 </Link>
                 <Button variant="danger" size="" onClick={deleteDestination}><i className="fa-regular fa-trash-can"></i>  DELETE</Button>

@@ -17,6 +17,7 @@ function Destinations() {
         .eq('continent_name', name)
         setDestinations(data)
         }
+    
 
     useEffect(() => {
         getDestinations()

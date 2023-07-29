@@ -8,27 +8,45 @@ import { supabase } from '../client'
 
 function Edit() {
     //GETS THE DESTINATION BY NAME FROM THE DATABASE TO USE TO SET INITIAL STATE FOR AUTOFILL
+    const [destination, setDestination] = useState([])
+    const { name } = useParams() //uses the continent param
+    const navigate = useNavigate()
+
     const getDestination = async () => {
-        try {
-            const findDestination = await supabase
-            .from("destinations")
+        let { data } = await supabase
+            .from('destinations')
             .select()
             .eq('name',name)
-            setDestination(findDestination)
-        } catch (Error) {
-            console.log(Error)
-        }
+        setDestination(data)
+        return destination
     }
-
-
     
     useEffect(() => {
         getDestination()
     }, [])
-    //SET INITIAL STATE TO CURRENT DB ENTRY
-    const navigate = useNavigate()
-    const { name } = useParams()
-    const [destination, setDestination] = useState([])
+    
+    const country = destination.map((dest) => {
+        return dest.country_name
+    })
+    const continent = destination.map((dest) => {
+        return dest.continent_name
+    })
+    const descrip = destination.map((dest) => {
+        return dest.description
+    })
+    const auth = destination.map((dest) => {
+        return dest.author
+    })
+    const date = destination.map((dest) => {
+        return dest.date_visited
+    })
+    const pic = destination.map((dest) => {
+        return dest.picture
+    })
+
+
+
+    //SET INITIAL STATE TO CURRENT DB ENTRY   
     const [continent_name, setContinent_name] = useState(destination.continent_name)
     const [country_name, setCountry_name] = useState(destination.country_name)
     const [description, setDescription] = useState(destination.description)
@@ -43,13 +61,19 @@ function Edit() {
     const editDestination = async (e) => {
         e.preventDefault()
         try {
-            const edited = { name, continent_name, country_name, description, author, date_visited, picture }
             const response = await supabase
             .from ("destinations")
-            .update()
+            .update({
+                country_name,
+                continent_name,
+                author,
+                description,
+                date_visited,
+                picture
+            })
             .eq('name',name)
             console.log(response)
-            navigate('/continents')
+            navigate(`/destination/${name}`)
         } catch (Error) {
             console.log(Error)
         }
