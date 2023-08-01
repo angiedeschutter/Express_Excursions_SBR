@@ -24,7 +24,12 @@ Supabase is used for the postgres database.
  
 
 ## Authors
-List the people on your team
+This project was initiated as a milestone 2 project for the UNLV Software Development bootcamp:
+    Angie DeSchutter,
+    Christian Bell,
+    Shigeyuki Isorena, 
+    Marvin Talavera,
+    John Giovenco
 
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details
